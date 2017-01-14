@@ -1,6 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('AnalyseCtrl', function($scope) {})
+.controller('AnalyseCtrl', function($scope) {
+
+
+})
 
 .controller('SyncCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -25,4 +28,6 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     isIncome: true
   };
+
+   $scope.productList = ["Abc", "xyz", "cef"];
 });

@@ -7,13 +7,29 @@
     </ion-list>
 
     <ion-item>
-      <ion-label color="primary" stacked>Enter Label:</ion-label>
-      <input type="text" name="userName" ng-model="user.name" placeholder="Red Bull..." required>
+      <ion-label color="primary" stacked>Enter Price:</ion-label>
+      <input type="text" name="price" ng-model="user.name" placeholder="1000...">
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Enter Number/Quatity:</ion-label>
-      <input type="text" name="quantity" ng-model="user.quantity" placeholder="1000..." required>
+      <ion-label color="primary" stacked>Enter Product:</ion-label>
+      <div class="input-group">
+        <span class="input-group-addon">#</span>
+        <input type="text" class="form-control transact-label" ng-model="user.name" placeholder="Red Bull..." id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" required>
+      </div>
+      <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" ng-repeat="tag in productList">
+        {{tag}}
+      </span>
     </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" stacked>Enter Quantity:</ion-label>
+      <input type="text" name="quantity" ng-model="user.quantity" placeholder="1...">
+    </ion-item>
+
+    <div class="col-sm-12">
+      <button type="button" class="btn btn-danger btn-lg btn-block col-sm-offset-1 col-sm-11 transact-save">Save</button>
+    </div>
+
   </ion-content>
 </ion-view>
