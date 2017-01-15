@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
 .controller('TransactCtrl', function($scope, $timeout) {
   $scope.settings = {isIncome: true};
 
-	$scope.user = {};
+	$scope.user = { quantity : 0, price : 0, isPushed: false};
 	var userId="Ajay01";
 	var dict = new buckets.Dictionary();
 
@@ -32,28 +32,25 @@ angular.module('starter.controllers', [])
 
 	firebase.database().ref().child('kwikUsers').orderByChild('uid').equalTo(userId).on("value", function(snapshot) {
 		snapshot.forEach(function(data) {
-			data.child('userDataSet').val().forEach(function(childData){
-				var a = childData;
-				var newKey = a.userData.hitCount+"_"+a.userData.userTag;
-				if(dict.containsKey(newKey))
-				{
-					var l_userData = dict.get(newKey);
-					l_userData.hitCount +=1;
-					dict.set(l_userData);
-				} else {
-					dict.set(newKey, a.userData);
-				}
-			});
+			var userData = data.val().userData;
+      var newKey = userData.hitCount+"_"+userData.userTag;
+      if(dict.containsKey(newKey))
+      {
+        var l_userData = dict.get(newKey);
+        l_userData.hitCount +=1;
+        dict.set(l_userData);
+      } else {
+        dict.set(newKey, userData);
+      }
 		});
 
 		var keys = dict.keys();
 		keys.sort();
 
-
 		$timeout(function(){
-		  for(var i=keys.length-1; i>=0; i--){
-        console.log(dict.get(keys[i]).userTag);
-        $scope.productList.push(dict.get(keys[i]).userTag);
+		  var len = keys.length-11 >=0 ? keys.length-11 : 0;
+		  for(var i = keys.length-1; i >= len; i--){
+        $scope.productList.push(dict.get(keys[i]));
       }
 		}, 100);
 	});
@@ -65,32 +62,43 @@ angular.module('starter.controllers', [])
 		var hitCount = 0;
 		var userTag = $scope.user.tag;
 
-		//var kwikRef = firebase.database().ref('kwikUsers/');
-		firebase.database().ref().child('kwikUsers').orderByChild('uid').equalTo(userId).on("value", function(snapshot) {
-			snapshot.forEach(function(data) {
-				data.child('userDataSet').val().forEach(function(childData){
-				var a = childData;
-				if(a.userData.userTag == userTag)
-					{
-						hitCount = a.userData.hitCount;
-						hitCount += 1;
-						a.userData.hitCount += hitCount;
-					}
-				});
-			});
-
-			if(hitCount == 0)
-			{
-				pushData(hitCount);
-			}
-		});
+		var kwikRef = firebase.database().ref('kwikUsers');
+		pushData(hitCount);
 	}
 
 	function pushData(hitCount)
 	{
-		alert("I am in hitCount == 0");
-		firebase.database().ref().child('kwikUsers').push({uid: userId, userDataSet: [{userData:{userTag:$scope.user.tag, productPrice:$scope.user.price, quantity:$scope.user.quantity, hitCount : 1}}]});
-		console.log('posted message to firebase');
+	  $scope.productList = [];
+		firebase.database().ref().child('kwikUsers').push({uid: userId, userData:{userTag:$scope.user.tag, productPrice:$scope.user.price,
+		quantity:$scope.user.quantity, hitCount : 1}});
+
+		$scope.user.quantity = 0;
+    $scope.user.price = 0;
+    $scope.user.tag = "";
+    $scope.user.isPushed = true;
+	}
+
+	$scope.updateForm = function(usr){console.log(usr);
+
+    if($scope.user.tag == usr.userTag){
+      if($scope.user.quantity == "undefined" || $scope.user.quantity == "" || $scope.user.quantity <= 0){
+        $scope.user.quantity = 1;
+      } else {
+        $scope.user.quantity += 1;
+      }
+
+      if($scope.user.price == "undefined" || $scope.user.price == "" || $scope.user.price <= 0){
+        $scope.user.price = 0;
+      } else {
+        $scope.user.price += parseInt(usr.productPrice);
+      }
+    } else {
+      $scope.user.quantity = 1;
+      $scope.user.price = 0;
+      $scope.user.price = parseInt(usr.productPrice);
+    }
+    $scope.user.tag = usr.userTag;
+
 	}
 });
 
