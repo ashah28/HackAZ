@@ -17,7 +17,7 @@
     </script>-->
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/bootstrap.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -30,10 +30,27 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
+	<script src="lib/buckets.js"></script>
+	<link href="lib/bootstrap.css" rel="stylesheet">
+	
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
+	<script>
+	
+		// Initialize Firebase
+	
+	var config = {
+		apiKey: "AIzaSyD1aYAm0-5J-YZdCgNv2fI2CYllYDgYtzk",
+		authDomain: "hackazproj.firebaseapp.com",
+		databaseURL: "https://hackazproj.firebaseio.com",
+		storageBucket: "hackazproj.appspot.com",
+		messagingSenderId: "528295034848"
+		};
+	firebase.initializeApp(config);
+</script>
   </head>
   <body ng-app="starter">
     <!--

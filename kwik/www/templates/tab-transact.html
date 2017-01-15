@@ -7,15 +7,15 @@
     </ion-list>
 
     <ion-item>
-      <ion-label color="primary" stacked>Enter Price:</ion-label>
-      <input type="text" name="price" ng-model="user.name" placeholder="1000...">
+      <ion-label color="primary" stacked>Price:</ion-label>
+      <input type="text" name="price" ng-model="user.price" placeholder="1000...">
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Enter Product:</ion-label>
+      <ion-label color="primary" stacked>Product Tag:</ion-label>
       <div class="input-group">
         <span class="input-group-addon">#</span>
-        <input type="text" class="form-control transact-label" ng-model="user.name" placeholder="Red Bull..." id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" required>
+        <input type="text" class="form-control transact-label" ng-model="user.tag" placeholder="Red Bull..." id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" required>
       </div>
       <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" ng-repeat="tag in productList">
         {{tag}}
@@ -23,12 +23,12 @@
     </ion-item>
 
     <ion-item>
-      <ion-label color="primary" stacked>Enter Quantity:</ion-label>
+      <ion-label color="primary" stacked>Quantity:</ion-label>
       <input type="text" name="quantity" ng-model="user.quantity" placeholder="1...">
     </ion-item>
 
     <div class="col-sm-12">
-      <button type="button" class="btn btn-danger btn-lg btn-block col-sm-offset-1 col-sm-11 transact-save">Save</button>
+      <button type="button" class="btn btn-danger btn-lg btn-block col-sm-offset-1 col-sm-11 transact-save" ng-click="push()">Save</button>
     </div>
 
   </ion-content>
