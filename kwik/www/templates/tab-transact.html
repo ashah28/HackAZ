@@ -17,9 +17,15 @@
         <span class="input-group-addon">#</span>
         <input type="text" class="form-control transact-label" ng-model="user.tag" placeholder="Red Bull..." id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" required>
       </div>
-      <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" ng-repeat="tag in productList">
-        {{tag}}
+      <div class="wrapper">
+        <span ng-repeat="tag in productList">
+          <br ng-if="$index%2 == 0"/>
+          <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" >
+          {{tag}}
+        </span>
       </span>
+
+      </div>
     </ion-item>
 
     <ion-item>
