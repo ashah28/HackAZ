@@ -32,6 +32,7 @@
 
   <script src="lib/buckets.js"></script>
   <script src="lib/bootstrap.js"></script>
+  <script src="lib/canvasjs.min.js"></script>
 
   <!-- your app's js -->
   <script src="js/app.js"></script>
@@ -40,6 +41,7 @@
   <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
 
   <script>
+
 
 		// Initialize Firebase
 
@@ -53,6 +55,34 @@
     firebase.initializeApp(config);
 
   </script>
+  <script type="text/javascript">
+window.showgraph = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		theme: "theme2",
+		title:{
+			text: "Revenue Generated in 2017"
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			toolTipContent: "${y}",
+
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{  y: 4000, indexLabel: "Glass Painting" },
+				{  y: 2902, indexLabel: "Mosaic" },
+				{  y: 1233, indexLabel: "Water Painting" },
+				{  y: 3400, indexLabel: "Abstract" },
+				{  y: 3423, indexLabel: "Conceptual"},
+			]
+		}
+		]
+	});
+	chart.render();
+}
+	</script>
 </head>
 <body ng-app="starter">
 <!--

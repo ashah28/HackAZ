@@ -18,12 +18,12 @@
         <input type="text" class="form-control transact-label" ng-model="user.tag" placeholder="Red Bull..." id="inputGroupSuccess2" aria-describedby="inputGroupSuccess2Status" required>
       </div>
       <div class="wrapper">
-        <span ng-repeat="tag in productList">
+        <span ng-repeat="usr in productList track by $index">
           <br ng-if="$index%2 == 0"/>
-          <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" >
-          {{tag}}
+          <span class="item-remove-animate item-icon-right btn btn-primary transact-tags" ng-click="updateForm(usr)">
+            {{usr.userTag}}
+          </span>
         </span>
-      </span>
 
       </div>
     </ion-item>
@@ -35,6 +35,10 @@
 
     <div class="col-sm-12">
       <button type="button" class="btn btn-danger btn-lg btn-block col-sm-offset-1 col-sm-11 transact-save" ng-click="push()">Save</button>
+    </div>
+
+    <div class="alert alert-success" ng-show="user.isPushed">
+      <strong>Product</strong> saved!</a>.
     </div>
 
   </ion-content>

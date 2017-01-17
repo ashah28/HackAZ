@@ -1,6 +1,9 @@
 angular.module('starter.controllers', [])
 
-.controller('AnalyseCtrl', function($scope) {})
+.controller('AnalyseCtrl', function($scope, $window) {
+
+ $window.showgraph();
+})
 
 .controller('SyncCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
